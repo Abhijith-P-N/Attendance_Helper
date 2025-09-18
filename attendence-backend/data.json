@@ -1,0 +1,32 @@
+[
+  {
+    "id": "96b23f4a-e9ad-4e8c-8046-77f494771ce8",
+    "name": "No SQL",
+    "total_classes": 31,
+    "leaves_taken": 13,
+    "classes_attended": 18,
+    "current_attendance_percentage": 58.06451612903226,
+    "neededFor75": 21,
+    "neededFor85": 56
+  },
+  {
+    "id": "b6777c76-fdbd-4590-92ec-09b9021d655a",
+    "name": "Plus Ultra",
+    "total_classes": 11,
+    "leaves_taken": 0,
+    "classes_attended": 11,
+    "current_attendance_percentage": 100,
+    "neededFor75": 0,
+    "neededFor85": 0
+  },
+  {
+    "id": "57aa4b3e-3504-4a23-9444-178cab5c6eea",
+    "name": "Maths",
+    "total_classes": 122,
+    "leaves_taken": 22,
+    "classes_attended": 100,
+    "current_attendance_percentage": 81.9672131147541,
+    "neededFor75": 0,
+    "neededFor85": 25
+  }
+]

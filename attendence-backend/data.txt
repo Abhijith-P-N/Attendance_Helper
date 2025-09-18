@@ -1,0 +1,2 @@
+{"total_classes":26,"leaves_taken":12,"classes_attended":14,"current_attendance_percentage":53.84615384615385}
+{"total_classes":13,"leaves_taken":10,"classes_attended":3,"current_attendance_percentage":23.076923076923077}

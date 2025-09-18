@@ -1,0 +1,205 @@
+/* App.css */
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: #f0f2f5;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container {
+  background: #fff;
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 600px;
+  text-align: center;
+}
+
+.navbar {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.nav-link {
+  text-decoration: none;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #3498db;
+  transition: color 0.3s;
+}
+
+.nav-link:hover {
+  color: #2980b9;
+}
+
+h1 {
+  color: #2c3e50;
+  margin-bottom: 2rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-bottom: 1.5rem;
+  font-weight: bold;
+  color: #4a4a4a;
+}
+
+input[type="text"],
+input[type="number"],
+select {
+  padding: 0.8rem;
+  margin-top: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1em;
+  transition: border-color 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus {
+  outline: none;
+  border-color: #3498db;
+}
+
+button {
+  padding: 1rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: #3498db;
+  color: white;
+  margin-top: 1rem;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+  background-color: #2980b9;
+  transform: translateY(-2px);
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background-color: #f0f0f0;
+  margin: 2rem 0;
+}
+
+.saved-data {
+  margin-top: 2rem;
+}
+
+.saved-data h2 {
+  color: #34495e;
+  margin-bottom: 1.5rem;
+}
+
+.saved-data ul {
+  list-style: none;
+  padding: 0;
+}
+
+.saved-record-item {
+  background-color: #ecf0f1;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.saved-record-item:hover {
+  background-color: #e0e6e7;
+  transform: translateY(-2px);
+}
+
+.record-name {
+  font-size: 1.1em;
+}
+
+.record-percentage {
+  font-weight: bold;
+  color: #3498db;
+}
+
+.daily-manager h2 {
+    margin-bottom: 1.5rem;
+}
+
+.daily-manager label {
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.daily-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.daily-actions button {
+    flex: 1;
+    padding: 1rem;
+    font-size: 1em;
+}
+
+.present-btn {
+    background-color: #2ecc71;
+}
+
+.present-btn:hover {
+    background-color: #27ae60;
+}
+
+.absent-btn {
+    background-color: #e74c3c;
+}
+
+.absent-btn:hover {
+    background-color: #c0392b;
+}
+
+.calculation-mode {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+    gap: 0.5rem;
+}
+
+.calculation-mode label {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border: 1px solid #ccc;
+    padding: 0.5rem;
+    border-radius: 5px;
+    font-weight: normal;
+    font-size: 0.9em;
+}

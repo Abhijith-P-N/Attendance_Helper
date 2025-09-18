@@ -1,0 +1,177 @@
+/* Popup.css */
+
+/* The popup-overlay creates a dark, semi-transparent background that covers the entire screen,
+   focusing attention on the popup itself. */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* The popup-container is the main box for the content. It's centered by the overlay's flex properties. */
+.popup-container {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+    position: relative;
+    animation: popup-fade-in 0.3s ease-out forwards;
+}
+
+/* Keyframes for a smooth fade-in animation for the popup container */
+@keyframes popup-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* General styling for the text within the popup */
+.popup-container h2 {
+    color: #333;
+    margin-bottom: 1.5rem;
+}
+
+.result-details p {
+    margin: 0.75rem 0;
+    font-size: 1.1em;
+    color: #555;
+}
+
+.result-details p strong {
+    color: #333;
+}
+
+/* Special styling for the 'needed classes' text to make it stand out */
+.needed-classes {
+    color: #d32f2f;
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-top: 1.5rem;
+}
+
+/* Styling for form elements in edit mode */
+.edit-form label {
+    display: block;
+    margin: 1.25rem 0;
+    text-align: left;
+    font-weight: bold;
+}
+
+.edit-form input {
+    width: 100%;
+    padding: 0.6rem;
+    margin-top: 0.4rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1em;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+.edit-form input:focus {
+    outline: none;
+    border-color: #2196f3;
+}
+
+/* Layout for the action buttons at the bottom of the popup */
+.popup-actions {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+/* General button styling */
+.popup-actions button {
+    padding: 0.8rem 1.8rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out, background-color 0.3s;
+    flex-grow: 1;
+    min-width: 120px;
+}
+
+.popup-actions button:hover {
+    transform: translateY(-2px);
+}
+
+/* Color styles for specific buttons */
+.save-btn {
+    background-color: #4caf50;
+    color: white;
+}
+
+.edit-btn {
+    background-color: #2196f3;
+    color: white;
+}
+
+.delete-btn {
+    background-color: #f44336;
+    color: white;
+}
+
+.close-btn {
+    background-color: #9e9e9e;
+    color: white;
+}
+
+/* Pie chart styling from your original code, enhanced for visual appeal */
+.pie-chart-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1.5rem 0;
+}
+
+.pie-chart {
+    --percentage: 0%;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: conic-gradient(
+        #4caf50 var(--percentage),
+        #e0e0e0 var(--percentage)
+    );
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.pie-chart::after {
+    content: '';
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    background: #fff;
+    border-radius: 50%;
+}
+
+.chart-label {
+    position: relative;
+    z-index: 1;
+    font-weight: bold;
+    font-size: 1.5em;
+    color: #333;
+}
