@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Popup from './Popup';
 
 // Add this variable to manage your API endpoint
-const API_URL = 'http://127.0.0.1:3000';
+const API_URL = 'https://attendance-helper.onrender.com';
 
 function AttendanceForm() {
   const [name, setName] = useState('');
