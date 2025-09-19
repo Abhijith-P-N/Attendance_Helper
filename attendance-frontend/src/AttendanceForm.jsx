@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Popup from "./Popup";
 
-const API_URL = "http://localhost:5000"; // adjust as needed
+const API_URL = "https://attendance-helper.onrender.com"; // adjust as needed
 
 function AttendanceForm() {
   const [name, setName] = useState("");

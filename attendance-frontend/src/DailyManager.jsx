@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Popup from './Popup';
 
-const API_URL = 'http://localhost:5000';
+const API_URL = 'https://attendance-helper.onrender.com';
 
 function DailyManager() {
   const [savedData, setSavedData] = useState([]);
@@ -23,6 +23,7 @@ function DailyManager() {
     try {
       const token = localStorage.getItem('token');
       const response = await fetch(`${API_URL}/data`, {
+        
         headers: { Authorization: `Bearer ${token}` }
       });
       const data = await response.json();

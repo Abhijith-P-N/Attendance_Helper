@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Popup from "./Popup";
 
-const API_URL = "http://localhost:5000";
+const API_URL = "https://attendance-helper.onrender.com";
 
 function SavedAttendance({ refreshList }) {
   const [savedData, setSavedData] = useState([]);
