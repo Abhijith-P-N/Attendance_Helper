@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Popup from './Popup';
 
+// Add this variable to manage your API endpoint
 const API_URL = 'https://attendance-helper.onrender.com';
 
 function DailyManager() {
   const [savedData, setSavedData] = useState([]);
   const [selectedSubjectId, setSelectedSubjectId] = useState('');
-  const [selectedRecord, setSelectedRecord] = useState(null);
-  const [isPopupVisible, setIsPopupVisible] = useState(false);
-
+  
   useEffect(() => {
     fetchSavedData();
   }, []);
@@ -45,16 +44,13 @@ function DailyManager() {
 
     const updatedRecord = {
       ...recordToUpdate,
-      total_classes: (recordToUpdate.total_classes || 0) + 1,
-      leaves_taken: status === 'absent'
-        ? (recordToUpdate.leaves_taken || 0) + 1
-        : (recordToUpdate.leaves_taken || 0),
+      total_classes: recordToUpdate.total_classes + 1,
+      leaves_taken: status === 'absent' ? recordToUpdate.leaves_taken + 1 : recordToUpdate.leaves_taken,
     };
 
     const newAttended = updatedRecord.total_classes - updatedRecord.leaves_taken;
     updatedRecord.classes_attended = newAttended;
-    updatedRecord.current_attendance_percentage =
-      updatedRecord.total_classes > 0 ? (newAttended / updatedRecord.total_classes) * 100 : 0;
+    updatedRecord.current_attendance_percentage = (newAttended / updatedRecord.total_classes) * 100;
     updatedRecord.neededFor75 = calculateNeededClasses(updatedRecord.total_classes, newAttended, 75);
     updatedRecord.neededFor85 = calculateNeededClasses(updatedRecord.total_classes, newAttended, 85);
 
@@ -93,67 +89,6 @@ function DailyManager() {
     return Math.ceil(needed);
   };
 
-  const openRecordDetails = (record) => {
-    setSelectedRecord(record);
-    setIsPopupVisible(true);
-  };
-
-  const handleUpdate = async (updatedRecord) => {
-    try {
-      const id = updatedRecord.id || updatedRecord._id;
-      if (!id) return;
-
-      const token = localStorage.getItem('token');
-      const payload = { ...updatedRecord };
-      delete payload.id;
-      delete payload._id;
-
-      const response = await fetch(`${API_URL}/data/${id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify(payload)
-      });
-
-      if (!response.ok) {
-        console.error('Update failed', await response.text());
-        alert('Failed to update record.');
-      } else {
-        await fetchSavedData();
-        setIsPopupVisible(false);
-        setSelectedRecord(null);
-      }
-    } catch (error) {
-      console.error('Error updating record:', error);
-    }
-  };
-
-  const handleDelete = async (idParam) => {
-    const id = idParam || (selectedRecord && (selectedRecord.id || selectedRecord._id));
-    if (!id) return;
-
-    try {
-      const token = localStorage.getItem('token');
-      const response = await fetch(`${API_URL}/data/${id}`, {
-        method: 'DELETE',
-        headers: { Authorization: `Bearer ${token}` }
-      });
-
-      if (!response.ok) {
-        console.error('Failed to delete', await response.text());
-        alert('Failed to delete record.');
-      } else {
-        await fetchSavedData();
-        setIsPopupVisible(false);
-        setSelectedRecord(null);
-      }
-    } catch (error) {
-      console.error('Error deleting record:', error);
-    }
-  };
-
   return (
     <>
       <h1>Daily Attendance Manager</h1>
@@ -185,12 +120,17 @@ function DailyManager() {
           {savedData.length > 0 ? (
             savedData.map((record) => {
               const percentage = record.current_attendance_percentage || 0;
-              let textColor = "red";
-              if (percentage >= 85) textColor = "green";
-              else if (percentage >= 75) textColor = "orange";
+
+              // Decide text color only for percentage
+              let textColor = "red"; // <75%
+              if (percentage >= 85) {
+                textColor = "green"; // >=85%
+              } else if (percentage >= 75) {
+                textColor = "orange"; // 75–84%
+              }
 
               return (
-                <li key={record.id} onClick={() => openRecordDetails(record)} className="saved-record-item">
+                <li key={record.id} className="saved-record-item">
                   <span className="record-name"><strong>{record.name}</strong></span>
                   <span className="record-percentage" style={{ color: textColor }}>
                     {percentage.toFixed(2)}%
@@ -203,20 +143,6 @@ function DailyManager() {
           )}
         </ul>
       </div>
-
-      {isPopupVisible && selectedRecord && (
-        <Popup
-          data={selectedRecord}
-          onSave={() => {}}
-          onDelete={handleDelete}
-          onUpdate={handleUpdate}
-          onClose={() => {
-            setIsPopupVisible(false);
-            setSelectedRecord(null);
-          }}
-          isNewRecord={false}
-        />
-      )}
     </>
   );
 }
