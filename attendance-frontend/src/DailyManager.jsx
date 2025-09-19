@@ -6,7 +6,7 @@ const API_URL = 'https://attendance-helper.onrender.com';
 function DailyManager() {
   const [savedData, setSavedData] = useState([]);
   const [selectedSubjectId, setSelectedSubjectId] = useState('');
-
+  
   useEffect(() => {
     fetchSavedData();
   }, []);
@@ -21,7 +21,6 @@ function DailyManager() {
     try {
       const response = await fetch(`${API_URL}/data`);
       const data = await response.json();
-      // Ensure an `id` exists
       const normalized = data.map(d => ({ ...d, id: d.id || d._id }));
       setSavedData(normalized);
     } catch (error) {
@@ -51,7 +50,6 @@ function DailyManager() {
     updatedRecord.neededFor85 = calculateNeededClasses(updatedRecord.total_classes, newAttended, 85);
 
     try {
-      // Remove id/_id from payload; server will recompute fields as well
       const payload = { ...updatedRecord };
       delete payload.id;
       delete payload._id;
@@ -110,7 +108,32 @@ function DailyManager() {
       <hr />
       <div className="saved-data">
         <h2>Current Records</h2>
-        <ul>{savedData.length > 0 ? (savedData.map((record) => (<li key={record.id} className="saved-record-item"><span className="record-name"><strong>{record.name}</strong></span><span className="record-percentage">{(record.current_attendance_percentage || 0).toFixed(2)}%</span></li>))) : (<li>No data saved yet.</li>)}</ul>
+        <ul>
+          {savedData.length > 0 ? (
+            savedData.map((record) => {
+              const percentage = record.current_attendance_percentage || 0;
+
+              // Decide text color only for percentage
+              let textColor = "red"; // <75%
+              if (percentage >= 85) {
+                textColor = "green"; // >=85%
+              } else if (percentage >= 75) {
+                textColor = "orange"; // 75–84%
+              }
+
+              return (
+                <li key={record.id} className="saved-record-item">
+                  <span className="record-name"><strong>{record.name}</strong></span>
+                  <span className="record-percentage" style={{ color: textColor }}>
+                    {percentage.toFixed(2)}%
+                  </span>
+                </li>
+              );
+            })
+          ) : (
+            <li key="no-data">No data saved yet.</li>
+          )}
+        </ul>
       </div>
     </>
   );

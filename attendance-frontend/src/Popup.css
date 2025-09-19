@@ -1,7 +1,3 @@
-/* Popup.css */
-
-/* The popup-overlay creates a dark, semi-transparent background that covers the entire screen,
-   focusing attention on the popup itself. */
 .popup-overlay {
     position: fixed;
     top: 0;
@@ -15,7 +11,6 @@
     z-index: 1000;
 }
 
-/* The popup-container is the main box for the content. It's centered by the overlay's flex properties. */
 .popup-container {
     background: #fff;
     padding: 2rem;
@@ -28,19 +23,11 @@
     animation: popup-fade-in 0.3s ease-out forwards;
 }
 
-/* Keyframes for a smooth fade-in animation for the popup container */
 @keyframes popup-fade-in {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-/* General styling for the text within the popup */
 .popup-container h2 {
     color: #333;
     margin-bottom: 1.5rem;
@@ -56,7 +43,6 @@
     color: #333;
 }
 
-/* Special styling for the 'needed classes' text to make it stand out */
 .needed-classes {
     color: #d32f2f;
     font-weight: bold;
@@ -64,7 +50,6 @@
     margin-top: 1.5rem;
 }
 
-/* Styling for form elements in edit mode */
 .edit-form label {
     display: block;
     margin: 1.25rem 0;
@@ -88,7 +73,6 @@
     border-color: #2196f3;
 }
 
-/* Layout for the action buttons at the bottom of the popup */
 .popup-actions {
     margin-top: 2rem;
     display: flex;
@@ -97,7 +81,6 @@
     flex-wrap: wrap;
 }
 
-/* General button styling */
 .popup-actions button {
     padding: 0.8rem 1.8rem;
     border: none;
@@ -114,28 +97,13 @@
     transform: translateY(-2px);
 }
 
-/* Color styles for specific buttons */
-.save-btn {
-    background-color: #4caf50;
-    color: white;
-}
+.save-btn { background-color: #4caf50; color: white; }
+.edit-btn { background-color: #2196f3; color: white; }
+.delete-btn { background-color: #f44336; color: white; }
+.close-btn { background-color: #9e9e9e; color: white; }
 
-.edit-btn {
-    background-color: #2196f3;
-    color: white;
-}
+/* ...existing CSS remains the same... */
 
-.delete-btn {
-    background-color: #f44336;
-    color: white;
-}
-
-.close-btn {
-    background-color: #9e9e9e;
-    color: white;
-}
-
-/* Pie chart styling from your original code, enhanced for visual appeal */
 .pie-chart-container {
     display: flex;
     justify-content: center;
@@ -148,10 +116,6 @@
     width: 150px;
     height: 150px;
     border-radius: 50%;
-    background: conic-gradient(
-        #4caf50 var(--percentage),
-        #e0e0e0 var(--percentage)
-    );
     display: flex;
     justify-content: center;
     align-items: center;
@@ -173,5 +137,4 @@
     z-index: 1;
     font-weight: bold;
     font-size: 1.5em;
-    color: #333;
 }

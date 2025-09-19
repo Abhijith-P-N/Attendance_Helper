@@ -36,28 +36,42 @@ const Popup = ({ data, onSave, onUpdate, onDelete, onClose, isNewRecord }) => {
   };
 
   const calculateNeededClasses = (total, attended, target) => {
-    if (total > 0 && (attended / total) * 100 >= target) {
-      return 0;
-    }
-    if (100 - target === 0) {
-      return "Not possible to reach 100% with leaves.";
-    }
+    if (total > 0 && (attended / total) * 100 >= target) return 0;
+    if (100 - target === 0) return "Not possible to reach 100% with leaves.";
     const needed = (total * target - 100 * attended) / (100 - target);
     return Math.ceil(needed);
   };
 
   const attendancePercentage = Number(data.current_attendance_percentage || 0);
 
+  // Determine label and chart color based on attendance
+  const getColor = (percentage) => {
+    if (percentage < 75) return '#d32f2f'; // red
+    if (percentage < 85) return '#cddc39'; // light green
+    return '#4caf50'; // green
+  };
+
+  const chartColor = getColor(attendancePercentage);
+
   return (
     <div className="popup-overlay">
       <div className="popup-container">
         <h2>{isNewRecord ? "Calculation Results" : "Record Details"}</h2>
+
         <div className="pie-chart-container">
           <div
             className="pie-chart"
-            style={{ '--percentage': `${attendancePercentage}%` }}
+            style={{
+              '--percentage': `${attendancePercentage}%`,
+              background: `conic-gradient(${chartColor} ${attendancePercentage}%, #e0e0e0 ${attendancePercentage}%)`
+            }}
           >
-            <span className="chart-label">{attendancePercentage.toFixed(1)}%</span>
+            <span 
+              className="chart-label" 
+              style={{ color: chartColor }}
+            >
+              {attendancePercentage.toFixed(1)}%
+            </span>
           </div>
         </div>
 

@@ -196,17 +196,35 @@ function AttendanceForm() {
       <div className="saved-data">
         <h2>Saved Attendance Records</h2>
         <ul>
-          {savedData.length > 0 ? (
-            savedData.map((record) => (
-              <li key={record.id} onClick={() => openRecordDetails(record)} className="saved-record-item">
-                <span className="record-name"><strong>{record.name}</strong></span>
-                <span className="record-percentage">{(record.current_attendance_percentage || 0).toFixed(2)}%</span>
-              </li>
-            ))
-          ) : (
-            <li key="no-data">No data saved yet.</li>
-          )}
-        </ul>
+  {savedData.length > 0 ? (
+    savedData.map((record) => {
+      const percentage = record.current_attendance_percentage || 0;
+
+      let textColor = "red"; // <75%
+      if (percentage >= 85) {
+        textColor = "green"; // >=85%
+      } else if (percentage >= 75) {
+        textColor = "orange"; // 75–84%
+      }
+
+      return (
+        <li
+          key={record.id}
+          onClick={() => openRecordDetails(record)}
+          className="saved-record-item"
+        >
+          <span className="record-name"><strong>{record.name}</strong></span>
+          <span className="record-percentage" style={{ color: textColor }}>
+            {percentage.toFixed(2)}%
+          </span>
+        </li>
+      );
+    })
+  ) : (
+    <li key="no-data">No data saved yet.</li>
+  )}
+</ul>
+
       </div>
       {isPopupVisible && (newCalculation || selectedRecord) && (
         <Popup 

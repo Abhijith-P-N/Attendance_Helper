@@ -5,7 +5,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 
 // The MongoDB Atlas connection string is now an environment variable
 const MONGODB_URI = process.env.MONGODB_URI;
