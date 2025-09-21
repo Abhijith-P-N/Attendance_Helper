@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import './Login.css';
+import { FaEye, FaEyeSlash } from 'react-icons/fa'; // eye icons
+
 const API_URL = 'https://attendance-helper.onrender.com';
 
 function Login({ onLogin }) {
@@ -6,6 +9,7 @@ function Login({ onLogin }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isRegister, setIsRegister] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -13,8 +17,8 @@ function Login({ onLogin }) {
 
     try {
       const body = isRegister
-        ? { username, email, password }          // send username on register
-        : { usernameOrEmail: email, password }; // login uses username/email
+        ? { username, email, password }
+        : { usernameOrEmail: email, password };
 
       const response = await fetch(`${API_URL}${endpoint}`, {
         method: 'POST',
@@ -23,6 +27,7 @@ function Login({ onLogin }) {
       });
 
       const data = await response.json();
+
       if (response.ok && !isRegister) {
         localStorage.setItem('token', data.token);
         onLogin();
@@ -38,38 +43,48 @@ function Login({ onLogin }) {
   };
 
   return (
-    <div className="login-container">
-      <h2>{isRegister ? "Register" : "Login"}</h2>
-      <form onSubmit={handleSubmit}>
-        {isRegister && (
+    <div className="login-page">
+      <div className="login-container">
+        <h2>{isRegister ? "Register" : "Login"}</h2>
+        <form onSubmit={handleSubmit}>
+          {isRegister && (
+            <input
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Username"
+              required
+            />
+          )}
           <input
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            placeholder="Username"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email"
             required
           />
-        )}
-        <input
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Email"
-          required
-        />
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-          required
-        />
-        <button type="submit">{isRegister ? "Register" : "Login"}</button>
-      </form>
-      <p
-        onClick={() => setIsRegister(!isRegister)}
-        style={{ cursor: 'pointer', color: 'blue' }}
-      >
-        {isRegister ? "Already have an account? Login" : "No account? Register"}
-      </p>
+
+          {/* Password input with toggle icon */}
+          <div className="password-field">
+            <input
+              type={showPassword ? "text" : "password"}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password"
+              required
+            />
+            <span
+              className="toggle-password"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </span>
+          </div>
+
+          <button type="submit">{isRegister ? "Register" : "Login"}</button>
+        </form>
+        <p onClick={() => setIsRegister(!isRegister)}>
+          {isRegister ? "Already have an account? Login" : "No account? Register"}
+        </p>
+      </div>
     </div>
   );
 }

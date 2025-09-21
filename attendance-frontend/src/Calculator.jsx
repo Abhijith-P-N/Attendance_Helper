@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 function Calculator() {
   const [totalClasses, setTotalClasses] = useState("");
@@ -61,7 +62,6 @@ function Calculator() {
     const neededFor85 = calculateNeededClasses(total, attended, 85);
 
     setResult({
-      name,
       total_classes: Math.round(total),
       leaves_taken: Math.round(leaves),
       classes_attended: Math.round(attended),
@@ -72,10 +72,23 @@ function Calculator() {
   };
 
   return (
-    <div style={{ padding: "20px" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+      style={{ padding: "20px" }}
+    >
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
         <h1>Calculator</h1>
-        <button
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
           onClick={() => navigate("/login")}
           style={{
             padding: "8px 16px",
@@ -87,10 +100,15 @@ function Calculator() {
           }}
         >
           Login
-        </button>
+        </motion.button>
       </div>
 
-      <form onSubmit={handleCalculate}>
+      <motion.form
+        onSubmit={handleCalculate}
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.3, duration: 0.6 }}
+      >
         <div className="calculation-mode">
           <label>
             <input
@@ -120,8 +138,6 @@ function Calculator() {
             Find Leaves
           </label>
         </div>
-
-        
 
         {calculationMode !== "find_total_classes" && (
           <label>
@@ -161,20 +177,24 @@ function Calculator() {
         )}
 
         <button type="submit">Calculate</button>
-      </form>
+      </motion.form>
 
       {result && (
-        <div className="results">
-          
+        <motion.div
+          className="results"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, duration: 0.6 }}
+        >
           <p>Total Classes: {result.total_classes}</p>
           <p>Leaves Taken: {result.leaves_taken}</p>
           <p>Classes Attended: {result.classes_attended}</p>
           <p>Current Attendance: {result.current_attendance_percentage}%</p>
           <p>Classes Needed for 75%: {result.neededFor75}</p>
           <p>Classes Needed for 85%: {result.neededFor85}</p>
-        </div>
+        </motion.div>
       )}
-    </div>
+    </motion.div>
   );
 }
 

@@ -1,0 +1,256 @@
+/* Background wrapper */
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f0f4ff; /* light blue */
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Card */
+.login-container {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 6px 20px rgba(0, 91, 187, 0.15);
+  width: 350px;
+  text-align: center;
+  animation: fadeIn 0.7s ease-in-out;
+}
+
+/* Heading */
+.login-container h2 {
+  margin-bottom: 1.5rem;
+  color: #0047ab;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+/* Inputs */
+.login-container input {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  margin: 0.6rem 0;
+  border: 1px solid #cfd8ef;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  box-sizing: border-box;
+  position: relative;
+  background: #fff;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.login-container input:focus {
+  border-color: #0047ab;
+  box-shadow: 0 0 6px rgba(0, 71, 171, 0.3);
+  outline: none;
+}
+
+/* Password field wrapper */
+.password-field {
+  position: relative;
+  width: 100%;
+}
+
+/* Password toggle icon */
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 18px;
+  color: #fff; /* white icon */
+  background-color: #0047ab; /* blue circle */
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2; /* ensure above input */
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.toggle-password:hover {
+  transform: scale(1.1);
+  background-color: #0056d2;
+}
+
+/* Button */
+/* Background wrapper */
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f0f4ff; /* light blue */
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Card */
+.login-container {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 6px 20px rgba(0, 91, 187, 0.15);
+  width: 350px;
+  text-align: center;
+  animation: fadeIn 0.7s ease-in-out;
+}
+
+/* Heading */
+.login-container h2 {
+  margin-bottom: 1.5rem;
+  color: #0047ab;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+/* Inputs */
+.login-container input {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  margin: 0.6rem 0;
+  border: 1px solid #cfd8ef;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  box-sizing: border-box;
+  position: relative;
+  background: #fff;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.login-container input:focus {
+  border-color: #0047ab;
+  box-shadow: 0 0 6px rgba(0, 71, 171, 0.3);
+  outline: none;
+}
+
+/* Password field wrapper */
+/* Background wrapper */
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f0f4ff; /* light blue */
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Card */
+.login-container {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 6px 20px rgba(0, 91, 187, 0.15);
+  width: 350px;
+  text-align: center;
+  animation: fadeIn 0.7s ease-in-out;
+}
+
+/* Heading */
+.login-container h2 {
+  margin-bottom: 1.5rem;
+  color: #0047ab;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+/* Inputs */
+.login-container input {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  margin: 0.6rem 0;
+  border: 1px solid #cfd8ef;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  box-sizing: border-box;
+  position: relative;
+  background: #fff;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.login-container input:focus {
+  border-color: #0047ab;
+  box-shadow: 0 0 6px rgba(0, 71, 171, 0.3);
+  outline: none;
+}
+
+/* Password field wrapper */
+.password-field {
+  position: relative;
+  width: 100%;
+}
+
+/* Password toggle icon */
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 18px;
+  color: #fff; /* white icon */
+  background-color: #0047ab; /* blue circle */
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2; /* ensure above input */
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.toggle-password:hover {
+  transform: scale(1.1);
+  background-color: #0056d2;
+}
+
+/* Button */
+.login-container button {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  margin-top: 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  background: #0047ab;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.login-container button:hover {
+  background: #0056d2;
+  transform: translateY(-2px);
+}
+
+/* Toggle text */
+.login-container p {
+  margin-top: 1.2rem;
+  font-size: 0.95rem;
+  color: #0047ab;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.login-container p:hover {
+  text-decoration: underline;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
