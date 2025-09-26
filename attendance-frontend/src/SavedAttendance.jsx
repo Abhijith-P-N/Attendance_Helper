@@ -18,7 +18,7 @@ function SavedAttendance({ refreshList }) {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await response.json();
-      setSavedData(data.map(d => ({ ...d, id: d.id || d._id })));
+      setSavedData(data.map((d) => ({ ...d, id: d.id || d._id })));
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -32,7 +32,7 @@ function SavedAttendance({ refreshList }) {
       delete payload.id;
       delete payload._id;
 
-      await fetch(`${API_URL}/data/${id}`, {
+      await fetch(`${API_URL}/attendance/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -50,11 +50,12 @@ function SavedAttendance({ refreshList }) {
   };
 
   const handleDelete = async (idParam) => {
-    const id = idParam || (selectedRecord && (selectedRecord.id || selectedRecord._id));
+    const id =
+      idParam || (selectedRecord && (selectedRecord.id || selectedRecord._id));
     if (!id) return;
     try {
       const token = localStorage.getItem("token");
-      await fetch(`${API_URL}/data/${id}`, {
+      await fetch(`${API_URL}/attendance/${id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -84,8 +85,12 @@ function SavedAttendance({ refreshList }) {
                 onClick={() => setSelectedRecord(record)}
                 style={{ cursor: "pointer" }}
               >
-                <span><strong>{record.name}</strong></span>
-                <span style={{ color: textColor }}>{percentage.toFixed(2)}%</span>
+                <span>
+                  <strong>{record.name}</strong>
+                </span>
+                <span style={{ color: textColor }}>
+                  {percentage.toFixed(2)}%
+                </span>
               </li>
             );
           })
