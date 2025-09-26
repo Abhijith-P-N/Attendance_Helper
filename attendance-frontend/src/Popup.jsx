@@ -31,23 +31,23 @@ const Popup = ({ data, onSave, onUpdate, onDelete, onClose, isNewRecord }) => {
       neededFor85: newNeeded85,
     };
 
-    onUpdate(updatedRecord);
+    onUpdate(updatedRecord); // ✅ Will call SavedAttendance.handleUpdate
     setIsEditing(false);
   };
 
   const calculateNeededClasses = (total, attended, target) => {
     if (total > 0 && (attended / total) * 100 >= target) return 0;
-    if (100 - target === 0) return "Not possible to reach 100% with leaves.";
+    if (100 - target === 0) return 'Not possible to reach 100% with leaves.';
     const needed = (total * target - 100 * attended) / (100 - target);
     return Math.ceil(needed);
   };
 
   const attendancePercentage = Number(data.current_attendance_percentage || 0);
 
-  // Determine label and chart color based on attendance
+  // Color logic
   const getColor = (percentage) => {
     if (percentage < 75) return '#d32f2f'; // red
-    if (percentage < 85) return '#cddc39'; // light green
+    if (percentage < 85) return '#cddc39'; // yellow-green
     return '#4caf50'; // green
   };
 
@@ -56,58 +56,107 @@ const Popup = ({ data, onSave, onUpdate, onDelete, onClose, isNewRecord }) => {
   return (
     <div className="popup-overlay">
       <div className="popup-container">
-        <h2>{isNewRecord ? "Calculation Results" : "Record Details"}</h2>
+        <h2>{isNewRecord ? 'Calculation Results' : 'Record Details'}</h2>
 
+        {/* Pie Chart */}
         <div className="pie-chart-container">
           <div
             className="pie-chart"
             style={{
               '--percentage': `${attendancePercentage}%`,
-              background: `conic-gradient(${chartColor} ${attendancePercentage}%, #e0e0e0 ${attendancePercentage}%)`
+              background: `conic-gradient(${chartColor} ${attendancePercentage}%, #e0e0e0 ${attendancePercentage}%)`,
             }}
           >
-            <span 
-              className="chart-label" 
-              style={{ color: chartColor }}
-            >
+            <span className="chart-label" style={{ color: chartColor }}>
               {attendancePercentage.toFixed(1)}%
             </span>
           </div>
         </div>
 
+        {/* Edit or Display Mode */}
         {isEditing ? (
           <div className="edit-form">
-            <label>Name: <input type="text" value={editName} onChange={(e) => setEditName(e.target.value)} /></label>
-            <label>Total Classes: <input type="number" value={editTotal} onChange={(e) => setEditTotal(e.target.value)} /></label>
-            <label>Leaves Taken: <input type="number" value={editLeaves} onChange={(e) => setEditLeaves(e.target.value)} /></label>
-            <button onClick={handleEditSave} className="save-btn">Save Changes</button>
+            <label>
+              Name:{' '}
+              <input
+                type="text"
+                value={editName}
+                onChange={(e) => setEditName(e.target.value)}
+              />
+            </label>
+            <label>
+              Total Classes:{' '}
+              <input
+                type="number"
+                value={editTotal}
+                onChange={(e) => setEditTotal(e.target.value)}
+              />
+            </label>
+            <label>
+              Leaves Taken:{' '}
+              <input
+                type="number"
+                value={editLeaves}
+                onChange={(e) => setEditLeaves(e.target.value)}
+              />
+            </label>
+            <button onClick={handleEditSave} className="save-btn">
+              Save Changes
+            </button>
           </div>
         ) : (
           <div className="result-details">
-            <p><strong>Subject:</strong> {data.name}</p>
-            <p><strong>Total Classes:</strong> {data.total_classes}</p>
-            <p><strong>Leaves Taken:</strong> {data.leaves_taken}</p>
-            <p><strong>Classes Attended:</strong> {data.classes_attended}</p>
-            <p><strong>Current Attendance:</strong> {attendancePercentage.toFixed(2)}%</p>
+            <p>
+              <strong>Subject:</strong> {data.name}
+            </p>
+            <p>
+              <strong>Total Classes:</strong> {data.total_classes}
+            </p>
+            <p>
+              <strong>Leaves Taken:</strong> {data.leaves_taken}
+            </p>
+            <p>
+              <strong>Classes Attended:</strong> {data.classes_attended}
+            </p>
+            <p>
+              <strong>Current Attendance:</strong>{' '}
+              {attendancePercentage.toFixed(2)}%
+            </p>
             {attendancePercentage < 75 && (
-              <p className="needed-classes"><strong>Needed for 75%:</strong> {data.neededFor75}</p>
+              <p className="needed-classes">
+                <strong>Needed for 75%:</strong> {data.neededFor75}
+              </p>
             )}
             {attendancePercentage < 85 && (
-              <p className="needed-classes"><strong>Needed for 85%:</strong> {data.neededFor85}</p>
+              <p className="needed-classes">
+                <strong>Needed for 85%:</strong> {data.neededFor85}
+              </p>
             )}
           </div>
         )}
 
+        {/* Actions */}
         <div className="popup-actions">
           {isNewRecord ? (
-            <button onClick={() => onSave(data)} className="save-btn">Save Record</button>
+            <button onClick={() => onSave(data)} className="save-btn">
+              Save Record
+            </button>
           ) : (
             <>
-              <button onClick={() => setIsEditing(true)} className="edit-btn">Edit</button>
-              <button onClick={() => onDelete(data._id || data.id)} className="delete-btn">Delete</button>
+              <button onClick={() => setIsEditing(true)} className="edit-btn">
+                Edit
+              </button>
+              <button
+                onClick={() => onDelete(data._id || data.id)}
+                className="delete-btn"
+              >
+                Delete
+              </button>
             </>
           )}
-          <button onClick={onClose} className="close-btn">Close</button>
+          <button onClick={onClose} className="close-btn">
+            Close
+          </button>
         </div>
       </div>
     </div>
