@@ -197,6 +197,49 @@ app.get('/data', authMiddleware, async (req, res) => {
   }
 });
 
+// --- Update Attendance Record ---
+app.put('/attendance/:id', authMiddleware, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { name, total_classes, leaves_taken } = req.body;
+
+    const record = await Attendance.findOne({ _id: id, user: req.user.id });
+    if (!record) return res.status(404).json({ error: 'Record not found' });
+
+    if (name !== undefined) record.name = name;
+    if (total_classes !== undefined) record.total_classes = Number(total_classes);
+    if (leaves_taken !== undefined) record.leaves_taken = Number(leaves_taken);
+
+    record.classes_attended = record.total_classes - record.leaves_taken;
+    record.current_attendance_percentage = record.total_classes > 0
+      ? (record.classes_attended / record.total_classes) * 100
+      : 0;
+
+    record.neededFor75 = calculateNeededClasses(record.total_classes, record.classes_attended, 75);
+    record.neededFor85 = calculateNeededClasses(record.total_classes, record.classes_attended, 85);
+
+    await record.save();
+    res.json(record);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to update record' });
+  }
+});
+
+// --- Delete Attendance Record ---
+app.delete('/attendance/:id', authMiddleware, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deleted = await Attendance.findOneAndDelete({ _id: id, user: req.user.id });
+    if (!deleted) return res.status(404).json({ error: 'Record not found' });
+
+    res.json({ message: 'Attendance record deleted', deleted });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to delete record' });
+  }
+});
+
 // --- Mark Attendance Endpoint (immutable once set) ---
 app.post('/mark-attendance', authMiddleware, async (req, res) => {
   try {
